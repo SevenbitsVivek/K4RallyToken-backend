@@ -6,8 +6,8 @@ const main = async () => {
     ];
     // const owner = '0x69321A1231687C9D55BbA0e37560a7058210B379';
     // const privateKey = 'de3498d1ef1ee0f3afd9ce6868f9912e52bbac7c8cf6bc43e169bbb80a70bc86';
-    const owner = '0x8DADF9aCaBEe5595a55eaF41c074d8e60A1bC3f8';
-    const privateKey = '9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542';
+    const owner = 'Owner_Wallet_Address';
+    const privateKey = 'Owner_Private_Key';
     const signer = new ethers.Wallet(privateKey);
     console.log("Signer Wallet Address ===>", signer.address)
 
