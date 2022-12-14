@@ -6,12 +6,13 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 // import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract K4NftCarSignatureEdition1 is ERC721, Pausable, Ownable {
+contract K4NftCarSignatureEdition1 is ERC721, Pausable, Ownable, ReentrancyGuard {
     uint256 public nftTotalSupply;
     bool public isSaleActive = false;
     uint256 private constant _CONTRACTID = 11;
@@ -31,7 +32,7 @@ contract K4NftCarSignatureEdition1 is ERC721, Pausable, Ownable {
         return "https://game.k4rally.io/nft/car/11/";
     }
 
-    function safeMintUsingEther(uint256[] memory tokenId, uint256 quantity, bytes32 hash, bytes memory signature) public payable {
+    function safeMintUsingEther(uint256[] memory tokenId, uint256 quantity, bytes32 hash, bytes memory signature) public payable nonReentrant {
         // require(msg.value == 230 ether, "Not enough payment sent!");
         // require(msg.value == 1000, "Not enough payment sent!");
         uint256 nftTotalSupplier = nftTotalSupply;
@@ -50,7 +51,7 @@ contract K4NftCarSignatureEdition1 is ERC721, Pausable, Ownable {
         signatureUsed[signature] = true;
     }
 
-    function safeMintUsingToken(uint256[] memory tokenId, address tokenAddress, uint256 amount, uint256 quantity, bytes32 hash, bytes memory signature) public {
+    function safeMintUsingToken(uint256[] memory tokenId, address tokenAddress, uint256 amount, uint256 quantity, bytes32 hash, bytes memory signature) public nonReentrant {
         require(isSaleActive, "Sale is not active" );
         uint256 nftTotalSupplier = nftTotalSupply;
         ERC20 token;
@@ -85,7 +86,7 @@ contract K4NftCarSignatureEdition1 is ERC721, Pausable, Ownable {
         isSaleActive = !isSaleActive;
     }
 
-    function recoverSigner(bytes32 hash, bytes memory signature) public pure returns (address) {
+    function recoverSigner(bytes32 hash, bytes memory signature) internal pure returns (address) {
         bytes32 messageDigest = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
         return ECDSA.recover(messageDigest, signature);
     }
