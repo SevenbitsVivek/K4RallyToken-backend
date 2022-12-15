@@ -12,8 +12,6 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URISto
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-// import "@openzeppelin/contracts/utils/Counters.sol";
-
 contract K4NftCarSignatureEdition1V1 is
     ERC721Upgradeable,
     PausableUpgradeable,
@@ -76,6 +74,7 @@ contract K4NftCarSignatureEdition1V1 is
             tokenId.length == quantity,
             "TokenId and quantity length should be match"
         );
+        require(msg.value != 0, "Sent some value");
         for (uint256 i = 0; i < quantity; i++) {
             _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);

@@ -76,6 +76,7 @@ contract K4NftCarSignatureEdition2V1 is
             tokenId.length == quantity,
             "TokenId and quantity length should be match"
         );
+        require(msg.value != 0, "Sent some value");
         for (uint256 i = 0; i < quantity; i++) {
             _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);

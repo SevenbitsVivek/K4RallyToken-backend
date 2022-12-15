@@ -11,7 +11,6 @@ module.exports = {
     testnet: {
       url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
       chainId: 97,
-      gasPrice: 20000000000,
       accounts: ['9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542']
     },
     //Goerli Testnet
@@ -26,15 +25,15 @@ module.exports = {
     }
   },
 
-  //Mainnets
+  // Mainnets
   // networks: {
   //   //BSC Mainnet
-  //   mainnet: {
-  //     url: "https://data-seed-prebsc-1-s1.binance.org:8545",
-  //     chainId: 56,
-  //     gasPrice: 20000000000,
-  //     accounts: ['9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542']
-  //   },
+  //   // gasPrice: 20000000000,
+  //   // mainnet: {
+  //   //   url: "https://bsc-dataseed.binance.org/",
+  //   //   chainId: 56,
+  //   //   accounts: ['9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542']
+  //   // },
   //   //Ethereum Mainnet
   //   mainnet: {
   //     url: "https://mainnet.infura.io/v3/04b835bf9aca4468b7d7ee914b4f58ff", // or any other JSON-RPC provider
@@ -49,11 +48,12 @@ module.exports = {
   //   }
   // },
   etherscan: {
-    //polygon apiKey
+    // polygon apiKey
     // apiKey: "61NXGEUMZJGEXU5ZTZQN8ZGHRBC8PAVSFN"
     apiKey: {
-      bscTestnet: "7FH7WAR3SHRS7UDI2YZQWVR5F1SJ3PJBI2",
-      goerli: "JB7KZVSGD7Z4AGJGEYITX4WY1W5V4I5D1K"
+      bsc: "7FH7WAR3SHRS7UDI2YZQWVR5F1SJ3PJBI2",
+      goerli: "JB7KZVSGD7Z4AGJGEYITX4WY1W5V4I5D1K",
+      mainnet: "JB7KZVSGD7Z4AGJGEYITX4WY1W5V4I5D1K"
     }
   },
   settings: {
