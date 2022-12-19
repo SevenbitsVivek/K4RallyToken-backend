@@ -65,8 +65,8 @@ contract K4NftCarSignatureEdition1 is
         );
         for (uint i = 0; i < quantity; i++) {
             require(tokenId[i] <= NFTTOTALSUPPLY, "Invalid tokenId");
-            _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
+            _safeMint(msg.sender, tokenId[i]);
         }
         signatureUsed[signature] = true;
     }
@@ -78,7 +78,7 @@ contract K4NftCarSignatureEdition1 is
         uint256 quantity,
         bytes32 hash,
         bytes memory signature
-    ) public nonReentrant {
+    ) public {
         require(quantity <= 10, "Cannot buy more than 10 nfts");
         require(quantity != 0, "Insufficient quantity");
         require(isSaleActive, "Sale Inactive");
@@ -98,22 +98,22 @@ contract K4NftCarSignatureEdition1 is
         require(token.allowance(msg.sender, address(this)) >= amount, "Check the token allowance");
         for (uint i = 0; i < quantity; i++) {
             require(tokenId[i] <= NFTTOTALSUPPLY, "Invalid tokenId");
-            _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
+            _safeMint(msg.sender, tokenId[i]);
         }
-        SafeERC20.safeTransferFrom(
-            token,
-            msg.sender,
-            address(this),
-            amount
-        );
+        signatureUsed[signature] = true;
         emit TokenTransfered(
             tokenAddress,
             msg.sender,
             address(this),
             amount
         );
-        signatureUsed[signature] = true;
+        SafeERC20.safeTransferFrom(
+            token,
+            msg.sender,
+            address(this),
+            amount
+        );
     }
 
     function withdraw(address payable recipient) public onlyOwner {
