@@ -13,7 +13,7 @@ contract K4NftCarSignatureEdition1 is
     Ownable,
     ReentrancyGuard
 {
-    uint256 private nftTotalSupply = 1000 ;
+    uint256 private constant NFTTOTALSUPPLY = 1000 ;
     bool public isSaleActive = true;
     uint256 private constant _CONTRACTID = 11;
 
@@ -64,7 +64,7 @@ contract K4NftCarSignatureEdition1 is
             "Invalid parameters"
         );
         for (uint i = 0; i < quantity; i++) {
-            require(tokenId[i] <= nftTotalSupply, "Invalid tokenId");
+            require(tokenId[i] <= NFTTOTALSUPPLY, "Invalid tokenId");
             _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
         }
@@ -97,7 +97,7 @@ contract K4NftCarSignatureEdition1 is
         token = IERC20(tokenAddress);
         require(token.allowance(msg.sender, address(this)) >= amount, "Check the token allowance");
         for (uint i = 0; i < quantity; i++) {
-            require(tokenId[i] <= nftTotalSupply, "Invalid tokenId");
+            require(tokenId[i] <= NFTTOTALSUPPLY, "Invalid tokenId");
             _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
         }
