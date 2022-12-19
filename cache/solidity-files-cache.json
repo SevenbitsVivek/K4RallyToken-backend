@@ -1,12 +1,12 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/sevenbits/7 bits/daap's/K4Rally/contracts/K4Rally_Edition1_V1.sol": {
-      "lastModificationDate": 1671108679936,
-      "contentHash": "452aaeec6401fc12bb765b1a96041f28",
-      "sourceName": "contracts/K4Rally_Edition1_V1.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/contracts/K4NftCarSignatureEdition1.sol": {
+      "lastModificationDate": 1671213532168,
+      "contentHash": "2cc97cf823dacd83a215ff660c662548",
+      "sourceName": "contracts/K4NftCarSignatureEdition1.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -30,30 +30,62 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
-        "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol"
+        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "K4NftCarSignatureEdition1V1"
+        "K4NftCarSignatureEdition1"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol": {
-      "lastModificationDate": 1671100337496,
-      "contentHash": "1453fc85149da6598faf08c46b88182d",
-      "sourceName": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+      "lastModificationDate": 1671100337480,
+      "contentHash": "a8e2d1c30042f64ed89c9d4157eb6cb9",
+      "sourceName": "@openzeppelin/contracts/security/ReentrancyGuard.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ReentrancyGuard"
+      ]
+    },
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1671100337472,
+      "contentHash": "e436cea06129be2c73cda4b1acc848b5",
+      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
+      "solcConfig": {
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -77,21 +109,57 @@
         }
       },
       "imports": [
-        "../proxy/utils/Initializable.sol"
+        "../utils/Context.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "ReentrancyGuardUpgradeable"
+        "Ownable"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol": {
-      "lastModificationDate": 1671100337492,
-      "contentHash": "cbe53d6b803c1102081e00b3a0418ea3",
-      "sourceName": "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 1671100337428,
+      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC20"
+      ]
+    },
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
+      "lastModificationDate": 1671100337352,
+      "contentHash": "190f627b9302b9602d3a313e28205cc5",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+      "solcConfig": {
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -115,22 +183,27 @@
         }
       },
       "imports": [
-        "../utils/ContextUpgradeable.sol",
-        "../proxy/utils/Initializable.sol"
+        "./IERC721.sol",
+        "./IERC721Receiver.sol",
+        "./extensions/IERC721Metadata.sol",
+        "../../utils/Address.sol",
+        "../../utils/Context.sol",
+        "../../utils/Strings.sol",
+        "../../utils/introspection/ERC165.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "PausableUpgradeable"
+        "ERC721"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol": {
-      "lastModificationDate": 1671100337488,
-      "contentHash": "403ce8273abde646bff81558ddf512ad",
-      "sourceName": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+      "lastModificationDate": 1671100337484,
+      "contentHash": "0320a90f714843ca19373ed143fc4466",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -154,63 +227,23 @@
         }
       },
       "imports": [
-        "../utils/ContextUpgradeable.sol",
-        "../proxy/utils/Initializable.sol"
+        "../IERC20.sol",
+        "../extensions/draft-IERC20Permit.sol",
+        "../../../utils/Address.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "OwnableUpgradeable"
+        "SafeERC20"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol": {
-      "lastModificationDate": 1671100337340,
-      "contentHash": "3731d62752408e56578b89ac293659c6",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IERC20Upgradeable.sol",
-        "./extensions/IERC20MetadataUpgradeable.sol",
-        "../../utils/ContextUpgradeable.sol",
-        "../../proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC20Upgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol": {
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
       "lastModificationDate": 1671100337280,
-      "contentHash": "b3e120a8002394aabbbc467369cd7390",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol",
+      "contentHash": "fe1190dbb6431c2464246925713f0f7f",
+      "sourceName": "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -234,21 +267,21 @@
         }
       },
       "imports": [
-        "../StringsUpgradeable.sol"
+        "../Strings.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "ECDSAUpgradeable"
+        "ECDSA"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol": {
-      "lastModificationDate": 1671100337372,
-      "contentHash": "27a1de422d2ce72e01554ec1ac9597ab",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1671100337256,
+      "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
+      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -271,186 +304,20 @@
           }
         }
       },
-      "imports": [
-        "./IERC721Upgradeable.sol",
-        "./IERC721ReceiverUpgradeable.sol",
-        "./extensions/IERC721MetadataUpgradeable.sol",
-        "../../utils/AddressUpgradeable.sol",
-        "../../utils/ContextUpgradeable.sol",
-        "../../utils/StringsUpgradeable.sol",
-        "../../utils/introspection/ERC165Upgradeable.sol",
-        "../../proxy/utils/Initializable.sol"
-      ],
+      "imports": [],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "ERC721Upgradeable"
+        "Context"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol": {
-      "lastModificationDate": 1671100337476,
-      "contentHash": "e9b0b058deea0144d9399002b67229f2",
-      "sourceName": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/utils/Address.sol": {
+      "lastModificationDate": 1671100337240,
+      "contentHash": "f31ad6fc4bbf9c06203987220156a6ba",
+      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../utils/AddressUpgradeable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.2"
-      ],
-      "artifacts": [
-        "Initializable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol": {
-      "lastModificationDate": 1671100337500,
-      "contentHash": "9e4e9c050500ddeb54999d91700a1046",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC20Upgradeable.sol",
-        "../extensions/draft-IERC20PermitUpgradeable.sol",
-        "../../../utils/AddressUpgradeable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "SafeERC20Upgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol": {
-      "lastModificationDate": 1671100337356,
-      "contentHash": "84e3aaecd9d661d539dd5c41faf2c02b",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../ERC721Upgradeable.sol",
-        "./IERC721EnumerableUpgradeable.sol",
-        "../../../proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC721EnumerableUpgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol": {
-      "lastModificationDate": 1671100337376,
-      "contentHash": "351bef3ae2616e8dea21cab97b446ba1",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../ERC721Upgradeable.sol",
-        "../../../proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC721URIStorageUpgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol": {
-      "lastModificationDate": 1671100337232,
-      "contentHash": "228f256dbb21393bc9ad02648e222f74",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -478,15 +345,15 @@
         "^0.8.1"
       ],
       "artifacts": [
-        "AddressUpgradeable"
+        "Address"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol": {
-      "lastModificationDate": 1671100337248,
-      "contentHash": "6200b84950eb05b4a92a39fd1d6e0f9b",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1671100337496,
+      "contentHash": "396031251978f8febfd90cb62cb240ec",
+      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -510,57 +377,21 @@
         }
       },
       "imports": [
-        "../proxy/utils/Initializable.sol"
+        "./math/Math.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "ContextUpgradeable"
+        "Strings"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol": {
-      "lastModificationDate": 1671100337448,
-      "contentHash": "a9ed3c7bc7d9ebb5e34f20829274f088",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+      "lastModificationDate": 1671100337308,
+      "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC20Upgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC20/extensions/IERC20MetadataUpgradeable.sol": {
-      "lastModificationDate": 1671100337444,
-      "contentHash": "9efcd5467a7f0bf533910ee8a267adb2",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/IERC20MetadataUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -584,246 +415,59 @@
         }
       },
       "imports": [
-        "../IERC20Upgradeable.sol"
+        "./IERC165.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "IERC20MetadataUpgradeable"
+        "ERC165"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol": {
-      "lastModificationDate": 1671100337504,
-      "contentHash": "3805d0267faeda96624b50a67ca89f08",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/StringsUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./math/MathUpgradeable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "StringsUpgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/utils/math/MathUpgradeable.sol": {
-      "lastModificationDate": 1671100337484,
-      "contentHash": "469f71655418cc5f328fcc9bfdf10e9a",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/math/MathUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "MathUpgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol": {
-      "lastModificationDate": 1671100337316,
-      "contentHash": "5f2d8b81c0ff5bd2047b4846c20b998d",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IERC165Upgradeable.sol",
-        "../../proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC165Upgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol": {
-      "lastModificationDate": 1671100337460,
-      "contentHash": "407d093831013935f7b2ab603ef3f21c",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../utils/introspection/IERC165Upgradeable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721Upgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC721/IERC721ReceiverUpgradeable.sol": {
-      "lastModificationDate": 1671100337456,
-      "contentHash": "ba28cf60b52b00d2b3a190bcdf0952bd",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC721/IERC721ReceiverUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721ReceiverUpgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC721/extensions/IERC721MetadataUpgradeable.sol": {
-      "lastModificationDate": 1671100337456,
-      "contentHash": "76212ca0265501d1eb3dd1175e6afca4",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/IERC721MetadataUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.16",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC721Upgradeable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721MetadataUpgradeable"
-      ]
-    },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/utils/introspection/IERC165Upgradeable.sol": {
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
       "lastModificationDate": 1671100337440,
-      "contentHash": "d6ecf203a5e72c845be9bbf2f304a289",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/introspection/IERC165Upgradeable.sol",
+      "contentHash": "eb7e61db29f31d88b3c1cef1b063d338",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721"
+      ]
+    },
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+      "lastModificationDate": 1671100337444,
+      "contentHash": "c22d4395e33763de693fd440c6fd10e1",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+      "solcConfig": {
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -851,15 +495,53 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "IERC165Upgradeable"
+        "IERC721Receiver"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC20/extensions/draft-IERC20PermitUpgradeable.sol": {
-      "lastModificationDate": 1671100337280,
-      "contentHash": "afab576c4d1f55fbf293a0daf3826e31",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/draft-IERC20PermitUpgradeable.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+      "lastModificationDate": 1671100337440,
+      "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721Metadata"
+      ]
+    },
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1671100337464,
+      "contentHash": "b9c58920ce74d6dc819161786112e7ee",
+      "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
+      "solcConfig": {
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -887,15 +569,15 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "IERC20PermitUpgradeable"
+        "Math"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts-upgradeable/token/ERC721/extensions/IERC721EnumerableUpgradeable.sol": {
-      "lastModificationDate": 1671100337456,
-      "contentHash": "bed9876900f8c465d42317f566c03828",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/IERC721EnumerableUpgradeable.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1671100337424,
+      "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -918,22 +600,20 @@
           }
         }
       },
-      "imports": [
-        "../IERC721Upgradeable.sol"
-      ],
+      "imports": [],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "IERC721EnumerableUpgradeable"
+        "IERC165"
       ]
     },
-    "/home/sevenbits/7 bits/daap's/K4Rally/contracts/K4Rally_Edition2_V1.sol": {
-      "lastModificationDate": 1671108695876,
-      "contentHash": "a3c30fa7b6f1072b21a32ba30657c3a5",
-      "sourceName": "contracts/K4Rally_Edition2_V1.sol",
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol": {
+      "lastModificationDate": 1671100337276,
+      "contentHash": "fb77f144244b9ab12533aa6ce85ef8c5",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol",
       "solcConfig": {
-        "version": "0.8.16",
+        "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -956,23 +636,12 @@
           }
         }
       },
-      "imports": [
-        "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
-        "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol"
-      ],
+      "imports": [],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "K4NftCarSignatureEdition2V1"
+        "IERC20Permit"
       ]
     }
   }

@@ -4,7 +4,7 @@ require("@openzeppelin/hardhat-upgrades");
 require('hardhat-contract-sizer');
 
 module.exports = {
-  solidity: "0.8.16",
+  solidity: "0.8.7",
   // Testnets
   networks: {
     //BSC Testnet
@@ -32,27 +32,27 @@ module.exports = {
   //   // mainnet: {
   //   //   url: "https://bsc-dataseed.binance.org/",
   //   //   chainId: 56,
-  //   //   accounts: ['9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542']
+  //   //   accounts: ['bddd6cedcd9236e4813a96a24b2c9568f3b78849271ba15dc6ebda5ef4ec750d']
   //   // },
   //   //Ethereum Mainnet
   //   mainnet: {
   //     url: "https://mainnet.infura.io/v3/04b835bf9aca4468b7d7ee914b4f58ff", // or any other JSON-RPC provider
   //     chainId: 1,
-  //     accounts: ['9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542']
+  //     accounts: ['bddd6cedcd9236e4813a96a24b2c9568f3b78849271ba15dc6ebda5ef4ec750d']
   //   },
   //   //Polygon Mainnet
   //   polygon: {
   //     url: "https://polygon-rpc.com",
   //     chainId: 137,   // Replace with the chain ID for the Polygon network you want to use
-  //     accounts: ['9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542']
+  //     accounts: ['bddd6cedcd9236e4813a96a24b2c9568f3b78849271ba15dc6ebda5ef4ec750d']
   //   }
   // },
   etherscan: {
     // polygon apiKey
     // apiKey: "61NXGEUMZJGEXU5ZTZQN8ZGHRBC8PAVSFN"
     apiKey: {
-      bsc: "7FH7WAR3SHRS7UDI2YZQWVR5F1SJ3PJBI2",
-      goerli: "JB7KZVSGD7Z4AGJGEYITX4WY1W5V4I5D1K",
+      // bsc: "7FH7WAR3SHRS7UDI2YZQWVR5F1SJ3PJBI2",
+      // goerli: "JB7KZVSGD7Z4AGJGEYITX4WY1W5V4I5D1K",
       mainnet: "JB7KZVSGD7Z4AGJGEYITX4WY1W5V4I5D1K"
     }
   },
