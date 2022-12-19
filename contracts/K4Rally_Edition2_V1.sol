@@ -73,8 +73,8 @@ contract K4NftCarSignatureEdition2V1 is
         );
         for (uint256 i = 0; i < quantity; i++) {
             require(tokenId[i] <= NFTTOTALSUPPLY, "Invalid tokenId");
-            _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
+            _safeMint(msg.sender, tokenId[i]);
         }
         signatureUsed[signature] = true;
     }
@@ -106,22 +106,22 @@ contract K4NftCarSignatureEdition2V1 is
         require(token.allowance(msg.sender, address(this)) >= amount, "Check the token allowance");
         for (uint256 i = 0; i < quantity; i++) {
             require(tokenId[i] <= NFTTOTALSUPPLY, "Invalid tokenId");
-            _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
+            _safeMint(msg.sender, tokenId[i]);
         }
-        SafeERC20Upgradeable.safeTransferFrom(
-            token,
-            msg.sender,
-            address(this),
-            amount
-        );
+        signatureUsed[signature] = true;
         emit TokenTransfered(
             tokenAddress,
             msg.sender,
             address(this),
             amount
         );
-        signatureUsed[signature] = true;
+        SafeERC20Upgradeable.safeTransferFrom(
+            token,
+            msg.sender,
+            address(this),
+            amount
+        );
     }
 
     function withdraw(address payable recipient) public onlyOwner {
