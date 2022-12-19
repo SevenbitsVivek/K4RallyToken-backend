@@ -17,7 +17,7 @@ contract K4NftCarSignatureEdition1V1 is
 {
     uint256 private nftTotalSupply = 50;
     bool public isSaleActive;
-    uint256 private constant _CONTRACTID = 11;
+    uint256 private constant _CONTRACTID = 12;
 
     event NFTMinted(
         address _from,
@@ -45,11 +45,11 @@ contract K4NftCarSignatureEdition1V1 is
     }
 
     function contractURI() public pure returns (string memory) {
-        return "https://game.k4rally.io/nft/car/11/";
+        return "https://game.k4rally.io/nft/car/12/";
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://game.k4rally.io/nft/car/11/";
+        return "https://game.k4rally.io/nft/car/12/";
     }
 
     function safeMintUsingEther(
@@ -127,6 +127,18 @@ contract K4NftCarSignatureEdition1V1 is
     function withdraw(address payable recipient) public onlyOwner {
         require(recipient != address(0), "Address cannot be zero");
         recipient.transfer(address(this).balance);
+    }
+    
+    function withdrawToken(address tokenAddress, address recipient) public onlyOwner {
+        require(recipient != address(0), "Address cannot be zero");
+        IERC20Upgradeable token;
+        token = IERC20Upgradeable(tokenAddress);
+        require(token.balanceOf(address(this)) > 0, "Insufficient balance");
+        SafeERC20Upgradeable.safeTransfer(
+            token,
+            recipient,
+            token.balanceOf(address(this))
+        );
     }
 
     function flipSaleStatus() public onlyOwner {
