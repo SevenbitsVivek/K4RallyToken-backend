@@ -4,7 +4,7 @@ const main = async () => {
         '0x69321A1231687C9D55BbA0e37560a7058210B379'
         // '0xccdb17b8eF68ffFdbCA4bf4AB6B765e41d61733A',
     ];
-    const privateKey = 'c244b6e8ae351e71fa353515c55a4e0be82fb5bf7186c18419f89421805f74b7';
+    const privateKey = 'bddd6cedcd9236e4813a96a24b2c9568f3b78849271ba15dc6ebda5ef4ec750d';
     // const owner = 'Owner_Wallet_Address';
     // const privateKey = 'Owner_Private_Key';
     const signer = new ethers.Wallet(privateKey);

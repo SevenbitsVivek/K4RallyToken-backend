@@ -32,19 +32,19 @@ module.exports = {
   //   // mainnet: {
   //   //   url: "https://bsc-dataseed.binance.org/",
   //   //   chainId: 56,
-  //   //   accounts: ['bddd6cedcd9236e4813a96a24b2c9568f3b78849271ba15dc6ebda5ef4ec750d']
+  //   //   accounts: ['9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542']
   //   // },
   //   //Ethereum Mainnet
   //   mainnet: {
   //     url: "https://mainnet.infura.io/v3/04b835bf9aca4468b7d7ee914b4f58ff", // or any other JSON-RPC provider
   //     chainId: 1,
-  //     accounts: ['bddd6cedcd9236e4813a96a24b2c9568f3b78849271ba15dc6ebda5ef4ec750d']
+  //     accounts: ['9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542']
   //   },
   //   //Polygon Mainnet
   //   polygon: {
   //     url: "https://polygon-rpc.com",
   //     chainId: 137,   // Replace with the chain ID for the Polygon network you want to use
-  //     accounts: ['bddd6cedcd9236e4813a96a24b2c9568f3b78849271ba15dc6ebda5ef4ec750d']
+  //     accounts: ['9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542']
   //   }
   // },
   etherscan: {
