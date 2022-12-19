@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract K4NftCarSignatureEdition1 is
+contract K4NftCarSignatureEdition2 is
     ERC721,
     Ownable,
     ReentrancyGuard
@@ -33,7 +33,7 @@ contract K4NftCarSignatureEdition1 is
     mapping(bytes => bool) private signatureUsed;
 
     constructor()
-        ERC721( "K4 Signature Edition 2 - Jan Cerney", "K4CARSE") {}
+        ERC721( "K4 Signature Edition #2 - Jan Cerney", "K4CARSE") {}
 
     function contractURI() public pure returns (string memory) {
         return "https://game.k4rally.io/nft/car/12/";
