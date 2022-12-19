@@ -1,26 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
-// import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract K4NftCarSignatureEdition1 is
     ERC721,
-    Pausable,
     Ownable,
     ReentrancyGuard
 {
-    uint256 public nftTotalSupply;
-    bool public isSaleActive = false;
+    uint256 private nftTotalSupply = 1000 ;
+    bool public isSaleActive = true;
     uint256 private constant _CONTRACTID = 11;
 
     event NFTMinted(
@@ -36,10 +30,10 @@ contract K4NftCarSignatureEdition1 is
         uint256 indexed _amount
     );
 
-    mapping(bytes => bool) public signatureUsed;
+    mapping(bytes => bool) private signatureUsed;
 
     constructor()
-        ERC721("K4 Signature Edition 1 - Christof Klausner Memorial", "K4CARSE")
+        ERC721("K4 Signature Edition #1 - Christof Klausner Memorial", "K4CARSE")
     {}
 
     function contractURI() public pure returns (string memory) {
@@ -56,24 +50,24 @@ contract K4NftCarSignatureEdition1 is
         bytes32 hash,
         bytes memory signature
     ) public payable nonReentrant {
-        // require(msg.value == 230 ether, "Not enough payment sent!");
-        require(isSaleActive, "Sale is not active");
-        require(quantity != 0, "Quantity cannot be zero");
+        require(quantity <= 10, "Cannot buy more than 10 nfts");
+        require(quantity != 0, "Insufficient quantity");
+        require(isSaleActive, "Sale Inactive");
+        require(msg.value != 0, "Insufficient amount");
         require(
             recoverSigner(hash, signature) == owner(),
-            "Address is not allowlisted"
+            "Address is not authorized"
         );
-        require(!signatureUsed[signature], "Signature has already been used.");
+        require(!signatureUsed[signature], "Already signature used");
         require(
             tokenId.length == quantity,
-            "TokenId and quantity length should be match"
+            "Invalid parameters"
         );
-        require(msg.value != 0, "Sent some value");
-        for (uint256 i = 0; i < quantity; i++) {
+        for (uint i = 0; i < quantity; i++) {
+            require(tokenId[i] <= nftTotalSupply, "Invalid tokenId");
             _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
         }
-        nftTotalSupply = nftTotalSupply + tokenId.length;
         signatureUsed[signature] = true;
     }
 
@@ -85,53 +79,58 @@ contract K4NftCarSignatureEdition1 is
         bytes32 hash,
         bytes memory signature
     ) public nonReentrant {
-        require(isSaleActive, "Sale is not active");
-        ERC20 token;
-        token = ERC20(tokenAddress);
-        uint256 allowance = token.allowance(msg.sender, address(this));
-        require(
-            quantity != 0 && amount != 0,
-            "Quantity or Amount cannot be zero"
-        );
+        require(quantity <= 10, "Cannot buy more than 10 nfts");
+        require(quantity != 0, "Insufficient quantity");
+        require(isSaleActive, "Sale Inactive");
+        require(amount != 0, "Insufficient amount");
         require(tokenAddress != address(0), "Address cannot be zero");
-        require(allowance >= amount, "Check the token allowance");
-        require(
-            token.balanceOf(msg.sender) >= amount,
-            "Insufficient token balance"
-        );
         require(
             recoverSigner(hash, signature) == owner(),
-            "Address is not allowlisted"
+            "Address is not authorized"
         );
-        require(!signatureUsed[signature], "Signature has already been used.");
+        require(!signatureUsed[signature], "Already signature used");
         require(
             tokenId.length == quantity,
-            "TokenId and quantity length should be match"
+            "Invalid parameter"
         );
-        for (uint256 i = 0; i < quantity; i++) {
-            SafeERC20.safeTransferFrom(
-                token,
-                msg.sender,
-                address(this),
-                amount
-            );
+        IERC20 token;
+        token = IERC20(tokenAddress);
+        require(token.allowance(msg.sender, address(this)) >= amount, "Check the token allowance");
+        for (uint i = 0; i < quantity; i++) {
+            require(tokenId[i] <= nftTotalSupply, "Invalid tokenId");
             _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
-            emit TokenTransfered(
-                tokenAddress,
-                msg.sender,
-                address(this),
-                amount
-            );
         }
-        nftTotalSupply = nftTotalSupply + tokenId.length;
+        SafeERC20.safeTransferFrom(
+            token,
+            msg.sender,
+            address(this),
+            amount
+        );
+        emit TokenTransfered(
+            tokenAddress,
+            msg.sender,
+            address(this),
+            amount
+        );
         signatureUsed[signature] = true;
     }
 
     function withdraw(address payable recipient) public onlyOwner {
         require(recipient != address(0), "Address cannot be zero");
-        uint256 balance = address(this).balance;
-        recipient.transfer(balance);
+        recipient.transfer(address(this).balance);
+    }
+
+    function withdrawToken(address tokenAddress, address recipient) public onlyOwner {
+        require(recipient != address(0), "Address cannot be zero");
+        IERC20 token;
+        token = IERC20(tokenAddress);
+        require(token.balanceOf(address(this)) > 0, "Insufficient balance");
+        SafeERC20.safeTransfer(
+            token,
+            recipient,
+            token.balanceOf(address(this))
+        );
     }
 
     function flipSaleStatus() public onlyOwner {
@@ -147,9 +146,5 @@ contract K4NftCarSignatureEdition1 is
             abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
         );
         return ECDSA.recover(messageDigest, signature);
-    }
-
-    function getContractBalance() public view returns (uint256) {
-        return address(this).balance;
     }
 }
