@@ -10,7 +10,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URISto
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract K4NftCarSignatureEdition1V1 is
+contract K4NftCarSignatureEdition2V1 is
     ERC721Upgradeable,
     OwnableUpgradeable,
     ReentrancyGuardUpgradeable
@@ -38,7 +38,7 @@ contract K4NftCarSignatureEdition1V1 is
         OwnableUpgradeable.__Ownable_init();
         ReentrancyGuardUpgradeable.__ReentrancyGuard_init();
         ERC721Upgradeable.__ERC721_init(
-            "K4 Signature Edition 2 - Jan Cerney",
+            "K4 Signature Edition #2 - Jan Cerney",
             "K4CARSE"
         );
         isSaleActive = newIsSaleActive;
