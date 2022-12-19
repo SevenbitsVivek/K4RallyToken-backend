@@ -1,20 +1,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract K4NftCarSignatureEdition1 is
-    ERC721,
-    Ownable,
-    ReentrancyGuard
+contract K4NftCarSignatureEdition1V1 is
+    ERC721Upgradeable,
+    OwnableUpgradeable,
+    ReentrancyGuardUpgradeable
 {
-    uint256 private nftTotalSupply = 1000 ;
-    bool public isSaleActive = true;
+    uint256 private nftTotalSupply = 50;
+    bool public isSaleActive;
     uint256 private constant _CONTRACTID = 11;
 
     event NFTMinted(
@@ -32,9 +34,15 @@ contract K4NftCarSignatureEdition1 is
 
     mapping(bytes => bool) private signatureUsed;
 
-    constructor()
-        ERC721("K4 Signature Edition #1 - Christof Klausner Memorial", "K4CARSE")
-    {}
+    function initialize(bool newIsSaleActive) public initializer {
+        OwnableUpgradeable.__Ownable_init();
+        ReentrancyGuardUpgradeable.__ReentrancyGuard_init();
+        ERC721Upgradeable.__ERC721_init(
+            "K4 Signature Edition #1 - Christof Klausner Memorial",
+            "K4CARSE"
+        );
+        isSaleActive = newIsSaleActive;
+    }
 
     function contractURI() public pure returns (string memory) {
         return "https://game.k4rally.io/nft/car/11/";
@@ -50,7 +58,7 @@ contract K4NftCarSignatureEdition1 is
         bytes32 hash,
         bytes memory signature
     ) public payable nonReentrant {
-        require(quantity <= 10, "Cannot buy more than 10 nfts");
+       require(quantity <= 10, "Cannot buy more than 10 nfts");
         require(quantity != 0, "Insufficient quantity");
         require(isSaleActive, "Sale Inactive");
         require(msg.value != 0, "Insufficient amount");
@@ -63,7 +71,7 @@ contract K4NftCarSignatureEdition1 is
             tokenId.length == quantity,
             "Invalid parameters"
         );
-        for (uint i = 0; i < quantity; i++) {
+        for (uint256 i = 0; i < quantity; i++) {
             require(tokenId[i] <= nftTotalSupply, "Invalid tokenId");
             _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
@@ -79,7 +87,7 @@ contract K4NftCarSignatureEdition1 is
         bytes32 hash,
         bytes memory signature
     ) public nonReentrant {
-        require(quantity <= 10, "Cannot buy more than 10 nfts");
+       require(quantity <= 10, "Cannot buy more than 10 nfts");
         require(quantity != 0, "Insufficient quantity");
         require(isSaleActive, "Sale Inactive");
         require(amount != 0, "Insufficient amount");
@@ -93,15 +101,15 @@ contract K4NftCarSignatureEdition1 is
             tokenId.length == quantity,
             "Invalid parameter"
         );
-        IERC20 token;
-        token = IERC20(tokenAddress);
+        IERC20Upgradeable token;
+        token = IERC20Upgradeable(tokenAddress);
         require(token.allowance(msg.sender, address(this)) >= amount, "Check the token allowance");
-        for (uint i = 0; i < quantity; i++) {
+        for (uint256 i = 0; i < quantity; i++) {
             require(tokenId[i] <= nftTotalSupply, "Invalid tokenId");
             _safeMint(msg.sender, tokenId[i]);
             emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
         }
-        SafeERC20.safeTransferFrom(
+        SafeERC20Upgradeable.safeTransferFrom(
             token,
             msg.sender,
             address(this),
@@ -120,13 +128,13 @@ contract K4NftCarSignatureEdition1 is
         require(recipient != address(0), "Address cannot be zero");
         recipient.transfer(address(this).balance);
     }
-
+    
     function withdrawToken(address tokenAddress, address recipient) public onlyOwner {
         require(recipient != address(0), "Address cannot be zero");
-        IERC20 token;
-        token = IERC20(tokenAddress);
+        IERC20Upgradeable token;
+        token = IERC20Upgradeable(tokenAddress);
         require(token.balanceOf(address(this)) > 0, "Insufficient balance");
-        SafeERC20.safeTransfer(
+        SafeERC20Upgradeable.safeTransfer(
             token,
             recipient,
             token.balanceOf(address(this))
@@ -145,6 +153,6 @@ contract K4NftCarSignatureEdition1 is
         bytes32 messageDigest = keccak256(
             abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
         );
-        return ECDSA.recover(messageDigest, signature);
+        return ECDSAUpgradeable.recover(messageDigest, signature);
     }
 }
