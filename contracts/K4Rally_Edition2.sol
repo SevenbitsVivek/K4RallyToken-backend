@@ -78,7 +78,7 @@ contract K4NftCarSignatureEdition2 is
         uint256 quantity,
         bytes32 hash,
         bytes memory signature
-    ) public nonReentrant {
+    ) public {
         require(quantity <= 10, "Cannot buy more than 10 nfts");
         require(quantity != 0, "Insufficient quantity");
         require(isSaleActive, "Sale Inactive");
