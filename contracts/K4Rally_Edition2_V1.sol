@@ -23,6 +23,7 @@ contract K4NftCarSignatureEdition2V1 is
         address _from,
         uint256 indexed _tokenId,
         uint256 indexed _quantity,
+        bool _status,
         uint256 _contractID
     );
     event TokenTransfered(
@@ -72,9 +73,13 @@ contract K4NftCarSignatureEdition2V1 is
             "Invalid parameters"
         );
         for (uint256 i = 0; i < quantity; i++) {
-            require(tokenId[i] <= NFTTOTALSUPPLY, "Invalid tokenId");
-            emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
-            _safeMint(msg.sender, tokenId[i]);
+            if(tokenId[i] <= NFTTOTALSUPPLY && !_exists(tokenId[i])){
+                emit NFTMinted(msg.sender, tokenId[i], quantity, true,_CONTRACTID);
+                _safeMint(msg.sender, tokenId[i]);
+            }
+            else{
+                emit NFTMinted(msg.sender, tokenId[i], quantity, false,_CONTRACTID);
+            }
         }
         signatureUsed[signature] = true;
     }
@@ -105,9 +110,13 @@ contract K4NftCarSignatureEdition2V1 is
         token = IERC20Upgradeable(tokenAddress);
         require(token.allowance(msg.sender, address(this)) >= amount, "Check the token allowance");
         for (uint256 i = 0; i < quantity; i++) {
-            require(tokenId[i] <= NFTTOTALSUPPLY, "Invalid tokenId");
-            emit NFTMinted(msg.sender, tokenId[i], quantity, _CONTRACTID);
-            _safeMint(msg.sender, tokenId[i]);
+            if(tokenId[i] <= NFTTOTALSUPPLY && !_exists(tokenId[i])){
+                emit NFTMinted(msg.sender, tokenId[i], quantity, true,_CONTRACTID);
+                _safeMint(msg.sender, tokenId[i]);
+            }
+            else{
+                emit NFTMinted(msg.sender, tokenId[i], quantity, false,_CONTRACTID);
+            }
         }
         signatureUsed[signature] = true;
         emit TokenTransfered(
