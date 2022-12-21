@@ -4,7 +4,7 @@ require("@openzeppelin/hardhat-upgrades");
 require('hardhat-contract-sizer');
 
 module.exports = {
-  solidity: "0.8.16",
+  solidity: "0.8.1",
   // Testnets
   networks: {
     //BSC Testnet
