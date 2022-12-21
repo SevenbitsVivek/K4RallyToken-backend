@@ -66,8 +66,8 @@ contract K4NftCarSignatureEdition1 is
         );
         for (uint i = 0; i < quantity; i++) {
             if(tokenId[i] <= NFTTOTALSUPPLY && !_exists(tokenId[i])){
-                emit NFTMinted(msg.sender, tokenId[i], quantity, true,_CONTRACTID);
                 _safeMint(msg.sender, tokenId[i]);
+                emit NFTMinted(msg.sender, tokenId[i], quantity, true,_CONTRACTID);
             }
             else{
                 emit NFTMinted(msg.sender, tokenId[i], quantity, false,_CONTRACTID);
@@ -103,8 +103,8 @@ contract K4NftCarSignatureEdition1 is
         require(token.allowance(msg.sender, address(this)) >= amount, "Check the token allowance");
         for (uint i = 0; i < quantity; i++) {
             if(tokenId[i] <= NFTTOTALSUPPLY && !_exists(tokenId[i])){
-                emit NFTMinted(msg.sender, tokenId[i], quantity, true,_CONTRACTID);
                 _safeMint(msg.sender, tokenId[i]);
+                emit NFTMinted(msg.sender, tokenId[i], quantity, true,_CONTRACTID);
             }
             else{
                 emit NFTMinted(msg.sender, tokenId[i], quantity, false,_CONTRACTID);

@@ -5,10 +5,10 @@ async function main() {
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  const K4_NFT_Car_Signature_Edition_1 = await ethers.getContractFactory("K4NftCarSignatureEdition1");
-  const k4_NFT_Car_Signature_Edition_1 = await K4_NFT_Car_Signature_Edition_1.deploy();
+  const K4NftCarSignatureEdition1 = await ethers.getContractFactory("K4NftCarSignatureEdition1");
+  const k4NftCarSignatureEdition1 = await K4NftCarSignatureEdition1.deploy();
 
-  console.log("K4NftCarSignatureEdition1 contract address:-", k4_NFT_Car_Signature_Edition_1.address);
+  console.log("K4NftCarSignatureEdition1 contract address:-", k4NftCarSignatureEdition1.address);
 }
 
 main()
