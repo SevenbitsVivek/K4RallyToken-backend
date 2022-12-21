@@ -21,6 +21,7 @@ contract K4NftCarSignatureEdition1 is
         address _from,
         uint256 indexed _tokenId,
         uint256 indexed _quantity,
+        bool _status,
         uint256 _contractID
     );
     event TokenTransfered(
