@@ -1,10 +1,10 @@
 require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-etherscan");
-require("@openzeppelin/hardhat-upgrades");
+require("@nomiclabs/hardhat-truffle5");
 require('hardhat-contract-sizer');
 
 module.exports = {
-  solidity: "0.8.1",
+  solidity: "0.8.16",
   // Testnets
   networks: {
     //BSC Testnet

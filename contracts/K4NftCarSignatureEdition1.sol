@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
@@ -62,12 +61,12 @@ contract K4NftCarSignatureEdition1 is
         require(!signatureUsed[signature], "Already signature used");
         require(
             tokenId.length == quantity,
-            "Invalid parameters"
+            "Invalid parameter"
         );
         for (uint i = 0; i < quantity; i++) {
             if(tokenId[i] <= NFTTOTALSUPPLY && !_exists(tokenId[i])){
-                emit NFTMinted(msg.sender, tokenId[i], quantity, true,_CONTRACTID);
                 _safeMint(msg.sender, tokenId[i]);
+                emit NFTMinted(msg.sender, tokenId[i], quantity, true,_CONTRACTID);
             }
             else{
                 emit NFTMinted(msg.sender, tokenId[i], quantity, false,_CONTRACTID);
@@ -103,8 +102,8 @@ contract K4NftCarSignatureEdition1 is
         require(token.allowance(msg.sender, address(this)) >= amount, "Check the token allowance");
         for (uint i = 0; i < quantity; i++) {
             if(tokenId[i] <= NFTTOTALSUPPLY && !_exists(tokenId[i])){
-                emit NFTMinted(msg.sender, tokenId[i], quantity, true,_CONTRACTID);
                 _safeMint(msg.sender, tokenId[i]);
+                emit NFTMinted(msg.sender, tokenId[i], quantity, true,_CONTRACTID);
             }
             else{
                 emit NFTMinted(msg.sender, tokenId[i], quantity, false,_CONTRACTID);

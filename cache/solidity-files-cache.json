@@ -2,11 +2,11 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/sevenbits/7 bits/daap's/K4Rally/contracts/K4NftCarSignatureEdition1.sol": {
-      "lastModificationDate": 1671631636536,
-      "contentHash": "8301ac1caf5ab182a3cede52436e0de5",
+      "lastModificationDate": 1672833982880,
+      "contentHash": "b6a9ca85652e4efa93518c3ef78e28b0",
       "sourceName": "contracts/K4NftCarSignatureEdition1.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -19,8 +19,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -49,7 +48,7 @@
       "contentHash": "fe1190dbb6431c2464246925713f0f7f",
       "sourceName": "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -62,8 +61,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -87,7 +85,7 @@
       "contentHash": "190f627b9302b9602d3a313e28205cc5",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -100,8 +98,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -131,7 +128,7 @@
       "contentHash": "a8e2d1c30042f64ed89c9d4157eb6cb9",
       "sourceName": "@openzeppelin/contracts/security/ReentrancyGuard.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -144,8 +141,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -167,7 +163,7 @@
       "contentHash": "e436cea06129be2c73cda4b1acc848b5",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -180,8 +176,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -205,7 +200,7 @@
       "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -218,8 +213,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -241,7 +235,7 @@
       "contentHash": "0320a90f714843ca19373ed143fc4466",
       "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -254,8 +248,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -281,7 +274,7 @@
       "contentHash": "396031251978f8febfd90cb62cb240ec",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -294,8 +287,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -319,7 +311,7 @@
       "contentHash": "b9c58920ce74d6dc819161786112e7ee",
       "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -332,8 +324,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -355,7 +346,7 @@
       "contentHash": "f31ad6fc4bbf9c06203987220156a6ba",
       "sourceName": "@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -368,8 +359,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -391,7 +381,7 @@
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -404,8 +394,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -427,7 +416,7 @@
       "contentHash": "eb7e61db29f31d88b3c1cef1b063d338",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -440,8 +429,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -465,7 +453,7 @@
       "contentHash": "c22d4395e33763de693fd440c6fd10e1",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -478,8 +466,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -501,7 +488,7 @@
       "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -514,8 +501,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -539,7 +525,7 @@
       "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -552,8 +538,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -577,7 +562,7 @@
       "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -590,8 +575,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -613,7 +597,7 @@
       "contentHash": "fb77f144244b9ab12533aa6ce85ef8c5",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol",
       "solcConfig": {
-        "version": "0.8.1",
+        "version": "0.8.16",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -626,8 +610,7 @@
                 "evm.bytecode",
                 "evm.deployedBytecode",
                 "evm.methodIdentifiers",
-                "metadata",
-                "storageLayout"
+                "metadata"
               ],
               "": [
                 "ast"
@@ -642,6 +625,119 @@
       ],
       "artifacts": [
         "IERC20Permit"
+      ]
+    },
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+      "lastModificationDate": 1671630977240,
+      "contentHash": "834a0dde221759af42b030253315b086",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC20.sol",
+        "./extensions/IERC20Metadata.sol",
+        "../../utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC20"
+      ]
+    },
+    "/home/sevenbits/7 bits/daap's/K4Rally/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+      "lastModificationDate": 1671630977396,
+      "contentHash": "909ab67fc5c25033fe6cd364f8c056f9",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC20Metadata"
+      ]
+    },
+    "/home/sevenbits/7 bits/daap's/K4Rally/contracts/MyToken.sol": {
+      "lastModificationDate": 1672820359112,
+      "contentHash": "3fabf8ba565954d5c98765c5f067a2e7",
+      "sourceName": "contracts/MyToken.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "MyToken"
       ]
     }
   }
