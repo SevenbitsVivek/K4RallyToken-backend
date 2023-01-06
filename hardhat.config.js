@@ -16,7 +16,7 @@ module.exports = {
     //Goerli Testnet
     goerli: {
       url: `https://goerli.infura.io/v3/681d784bc2db408b8aa49ec6b887d47a`,
-      accounts: ['9549755e8d90d277f1e2494b7de07dcad85241eacf7d769b7b983992bce14542'],
+      accounts: ['c244b6e8ae351e71fa353515c55a4e0be82fb5bf7186c18419f89421805f74b7'],
     },
     //Polygon Testnet
     matic: {
@@ -49,12 +49,13 @@ module.exports = {
   // },
   etherscan: {
     // polygon apiKey
-    apiKey: "61NXGEUMZJGEXU5ZTZQN8ZGHRBC8PAVSFN"
-    // apiKey: {
-    //   bsc: "7FH7WAR3SHRS7UDI2YZQWVR5F1SJ3PJBI2",
-      // goerli: "JB7KZVSGD7Z4AGJGEYITX4WY1W5V4I5D1K",
-      // mainnet: "JB7KZVSGD7Z4AGJGEYITX4WY1W5V4I5D1K"
-    // }
+    // apiKey: "61NXGEUMZJGEXU5ZTZQN8ZGHRBC8PAVSFN"
+    apiKey: {
+      bscTestnet: "7FH7WAR3SHRS7UDI2YZQWVR5F1SJ3PJBI2",
+      bsc: "7FH7WAR3SHRS7UDI2YZQWVR5F1SJ3PJBI2",
+      goerli: "JB7KZVSGD7Z4AGJGEYITX4WY1W5V4I5D1K",
+      mainnet: "JB7KZVSGD7Z4AGJGEYITX4WY1W5V4I5D1K"
+    }
   },
   settings: {
     optimizer: {
