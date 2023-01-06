@@ -32,7 +32,7 @@ contract K4NftCarSignatureEdition2 is ERC721, Ownable, ReentrancyGuard {
     mapping(bytes => bool) private signatureUsed;
     mapping(address => bool) private whitelist;
 
-    constructor() ERC721("K4 Signature Edition #2 - Jan Cerney", "K4CARSE") {}
+    constructor() ERC721("Jan Cerny - K4CARSE2", "K4CARSE") {}
 
     function contractURI() external pure returns (string memory) {
         return "https://game.k4rally.io/nft/car/12/";

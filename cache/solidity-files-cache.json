@@ -628,8 +628,8 @@
       ]
     },
     "/home/sevenbits/7 bits/daap's/K4Rally/contracts/K4NftCarSignatureEdition2.sol": {
-      "lastModificationDate": 1672985034888,
-      "contentHash": "18cfadb299df313c9186cd5d1b49f4e7",
+      "lastModificationDate": 1672986707676,
+      "contentHash": "de2929b8e84a16889f5cbbe72dba60d1",
       "sourceName": "contracts/K4NftCarSignatureEdition2.sol",
       "solcConfig": {
         "version": "0.8.16",
