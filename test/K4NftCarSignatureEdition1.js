@@ -208,7 +208,7 @@ contract('K4NftCarSignatureEdition1', function (accounts) {
         }
     });
 
-    it('owner withdraw tokens and ethers with 0 token address , then user will get an error', async () => {
+    it('if owner withdraw tokens and ethers with 0 token address , then user will get an error', async () => {
         await MyTokenInstance.transfer(wallet1.address, 1000)
         await MyTokenInstance.approve(K4NftCarSignatureEdition1Instance.address, tempUser2.amount, { from: wallet1.address })
         await K4NftCarSignatureEdition1Instance.safeMintUsingToken(tempUser3.tokenId, MyTokenInstance.address, tempUser4.amount, tempUser3.quantity, "0x0c817d62055bf366dbe9f773688dd073ded3911f6e03a5c03a422e5087d63757", "0x875a4936da84590f09acffd44b76269d8b361df7d35cb15490ac88cd0f78b8b45f95fcc6468fd1e9a0ac7644c92b3658f46b491bbe4fbeb7eabee28aef5906891c", { from: wallet1.address });
@@ -225,6 +225,26 @@ contract('K4NftCarSignatureEdition1', function (accounts) {
         } catch (error) {
             console.log("Error handled")
             assert.equal(error.message, "VM Exception while processing transaction: reverted with reason string 'Address cannot be zero'")
+        }
+    });
+
+    it('if owner withdraw tokens and ethers with non owner account , then user will get an error', async () => {
+        await MyTokenInstance.transfer(wallet1.address, 1000)
+        await MyTokenInstance.approve(K4NftCarSignatureEdition1Instance.address, tempUser2.amount, { from: wallet1.address })
+        await K4NftCarSignatureEdition1Instance.safeMintUsingToken(tempUser3.tokenId, MyTokenInstance.address, tempUser4.amount, tempUser3.quantity, "0x758bcd705b039da17acf6fc7c5f0d9d633292cf7abd0bd5aeb2968de58c125a2", "0x88db2506fdaf2c4c0fd0db2af6d3e612950e88926d9868121b5d746149a6e48f7752223b34e4b2a1830c6ba1ae46b572fd220ec196cf969c75c4adecebf38c241c", { from: wallet1.address });
+        await K4NftCarSignatureEdition1Instance.safeMintUsingEther(tempUser3.tokenId, tempUser3.quantity, "0x712ebdb774b586a37e0baf464a0d910289d618cfc1f6ca659dfd3a08be531674", "0xd95d1bdfc43027d1403a008a788cdad3b3e0369426da57fd6dbd29ea87e099e55b9b073cd6823ead79aef322539efcc5ba9816a7bfeb23ab8a0a3f0803a97e541c", { from: wallet1.address, value: 1000 });
+        await K4NftCarSignatureEdition1Instance.withdrawToken(MyTokenInstance.address, accounts[3], { from: "0x90F79bf6EB2c4f870365E785982E1f101E93b906" })
+        await K4NftCarSignatureEdition1Instance.withdraw(accounts[3], { from: "0x90F79bf6EB2c4f870365E785982E1f101E93b906" })
+        try {
+            await MyTokenInstance.transfer(wallet1.address, 1000)
+            await MyTokenInstance.approve(K4NftCarSignatureEdition1Instance.address, tempUser2.amount, { from: wallet1.address })
+            await K4NftCarSignatureEdition1Instance.safeMintUsingToken([4, 5, 6, 7, 8, 9, 10, 11, 12, 13], MyTokenInstance.address, tempUser4.amount, 10, "0x539a2c57d0d9b22ee9628f5c311e32a8d8ff9d4536aad5961de90417691e81f3", "0x677342d8322cd388708f27de291ac603bb03d77cb8e6563d37126604f5ae76be31515f37d0a4711bbdf7bfc7f5935433760bd018e086e69f9602d6cd9b7c24aa1c", { from: wallet1.address });
+            await K4NftCarSignatureEdition1Instance.safeMintUsingEther(tempUser3.tokenId, tempUser3.quantity, "0x6ecff9f760ef816a1f9f08b5ccd5b5f6580a514fe3b2cf587b5880aa9afdc6db", "0xe8ee9fcc8086a610af68310d4db242773123a71158d2c4468d56dfa36163c622518d860893be5379a1745f58a1e6a31b1747d73b6e7d483976e3599c616b247d1c", { from: wallet1.address, value: 1000 });
+            await K4NftCarSignatureEdition1Instance.withdrawToken(MyTokenInstance.address, accounts[3], { from: "0x90F79bf6EB2c4f870365E785982E1f101E93b906" })
+            await K4NftCarSignatureEdition1Instance.withdraw(accounts[3], { from: "0x90F79bf6EB2c4f870365E785982E1f101E93b906" })
+        } catch (error) {
+            console.log("Error handled")
+            assert.equal(error.message, "VM Exception while processing transaction: reverted with reason string 'Ownable: caller is not the owner'")
         }
     });
 });
