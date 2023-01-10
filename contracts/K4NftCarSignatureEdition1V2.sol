@@ -9,11 +9,11 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract K4NftCarSignatureEdition2 is ERC721, Ownable, ReentrancyGuard {
+contract K4NftCarSignatureEdition1 is ERC721, Ownable, ReentrancyGuard {
     uint256 private constant NFTTOTALSUPPLY = 1000;
     bool public isSaleActive = true;
+    uint256 private constant _CONTRACTID = 11;
     address[] private hotWalletAddress;
-    uint256 private constant _CONTRACTID = 12;
 
     event NFTMinted(
         address _from,
@@ -32,14 +32,19 @@ contract K4NftCarSignatureEdition2 is ERC721, Ownable, ReentrancyGuard {
     mapping(bytes => bool) private signatureUsed;
     mapping(address => bool) private whitelist;
 
-    constructor() ERC721("Jan Cerny - K4CARSE2", "K4CARSE") {}
+    constructor()
+        ERC721(
+            "K4 Signature Edition #1 - Christof Klausner Memorial",
+            "K4CARSE"
+        )
+    {}
 
-    function contractURI() external pure returns (string memory) {
-        return "https://game.k4rally.io/nft/car/12/";
+    function contractURI() public pure returns (string memory) {
+        return "https://game.k4rally.io/nft/car/11/";
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://game.k4rally.io/nft/car/12/";
+        return "https://game.k4rally.io/nft/car/11/";
     }
 
     function safeMintUsingEther(
@@ -47,7 +52,7 @@ contract K4NftCarSignatureEdition2 is ERC721, Ownable, ReentrancyGuard {
         uint256 quantity,
         bytes32 hash,
         bytes memory signature
-    ) external payable nonReentrant {
+    ) public payable nonReentrant {
         require(quantity <= 10, "Cannot buy more than 10 nfts");
         require(quantity != 0, "Insufficient quantity");
         require(isSaleActive, "Sale Inactive");
@@ -88,7 +93,7 @@ contract K4NftCarSignatureEdition2 is ERC721, Ownable, ReentrancyGuard {
         uint256 quantity,
         bytes32 hash,
         bytes memory signature
-    ) external {
+    ) public {
         require(quantity <= 10, "Cannot buy more than 10 nfts");
         require(quantity != 0, "Insufficient quantity");
         require(isSaleActive, "Sale Inactive");
@@ -104,7 +109,7 @@ contract K4NftCarSignatureEdition2 is ERC721, Ownable, ReentrancyGuard {
         token = IERC20(tokenAddress);
         require(
             token.allowance(msg.sender, address(this)) >= amount,
-            "Check token allowance"
+            "Check the token allowance"
         );
         for (uint256 i = 0; i < quantity; i++) {
             if (tokenId[i] <= NFTTOTALSUPPLY && !_exists(tokenId[i])) {
@@ -127,8 +132,8 @@ contract K4NftCarSignatureEdition2 is ERC721, Ownable, ReentrancyGuard {
             }
         }
         signatureUsed[signature] = true;
-        SafeERC20.safeTransferFrom(token, msg.sender, address(this), amount);
         emit TokenTransfered(tokenAddress, msg.sender, address(this), amount);
+        SafeERC20.safeTransferFrom(token, msg.sender, address(this), amount);
     }
 
     function mintHotWalletUsingToken(
@@ -171,19 +176,16 @@ contract K4NftCarSignatureEdition2 is ERC721, Ownable, ReentrancyGuard {
         emit TokenTransfered(tokenAddress, msg.sender, address(this), amount);
     }
 
-    function withdraw(address payable recipient) external onlyOwner {
+    function withdraw(address payable recipient) public onlyOwner {
         require(recipient != address(0), "Address cannot be zero");
         recipient.transfer(address(this).balance);
     }
 
     function withdrawToken(address tokenAddress, address recipient)
-        external
+        public
         onlyOwner
     {
-        require(
-            recipient != address(0) && tokenAddress != address(0),
-            "Address cannot be zero"
-        );
+        require(recipient != address(0), "Address cannot be zero");
         IERC20 token;
         token = IERC20(tokenAddress);
         require(token.balanceOf(address(this)) > 0, "Insufficient balance");
@@ -192,10 +194,6 @@ contract K4NftCarSignatureEdition2 is ERC721, Ownable, ReentrancyGuard {
             recipient,
             token.balanceOf(address(this))
         );
-    }
-
-    function flipSaleStatus() external onlyOwner {
-        isSaleActive = !isSaleActive;
     }
 
     function setHotwalletAddress(address user) external onlyOwner {
@@ -229,6 +227,10 @@ contract K4NftCarSignatureEdition2 is ERC721, Ownable, ReentrancyGuard {
         returns (address[] memory)
     {
         return hotWalletAddress;
+    }
+
+    function flipSaleStatus() public onlyOwner {
+        isSaleActive = !isSaleActive;
     }
 
     function recoverSigner(bytes32 hash, bytes memory signature)
