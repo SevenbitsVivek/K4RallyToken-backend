@@ -10,6 +10,7 @@
       {
         "ignoreConstructors": true
       }
-    ]
+    ],
+    "compiler-version": "off"
   }
 }
