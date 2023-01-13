@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract K4NftCarSignatureEdition1 is ERC721, Ownable, ReentrancyGuard {
+contract K4NftCarSignatureEdition1V1 is ERC721, Ownable, ReentrancyGuard {
     uint256 private constant NFTTOTALSUPPLY = 1000;
     bool public isSaleActive = true;
     uint256 private constant _CONTRACTID = 11;
