@@ -10,13 +10,12 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract K4NftCarSignatureEdition1V2 is ERC721, Ownable, ReentrancyGuard {
-    uint256 private constant NFTTOTALSUPPLY = 1000;
+    uint256 private constant NFTTOTALSUPPLY = 999;
     bool public isSaleActive = true;
     uint256 private constant _CONTRACTID = 11;
-    address[] private hotWalletAddress;
 
     event NFTMinted(
-        address _from,
+        address _to,
         uint256 indexed _tokenId,
         uint256 indexed _quantity,
         bool _success,
@@ -30,7 +29,7 @@ contract K4NftCarSignatureEdition1V2 is ERC721, Ownable, ReentrancyGuard {
     );
 
     mapping(bytes => bool) private signatureUsed;
-    mapping(address => bool) private whitelist;
+    mapping(address => bool) private whitelistedAddress;
 
     constructor()
         ERC721(
@@ -45,6 +44,11 @@ contract K4NftCarSignatureEdition1V2 is ERC721, Ownable, ReentrancyGuard {
 
     function _baseURI() internal pure override returns (string memory) {
         return "https://game.k4rally.io/nft/car/11/";
+    }
+
+    modifier isWhitelisted(address _address) {
+        require(whitelistedAddress[_address], "You need to be whitelisted");
+        _;
     }
 
     function safeMintUsingEther(
@@ -136,35 +140,26 @@ contract K4NftCarSignatureEdition1V2 is ERC721, Ownable, ReentrancyGuard {
         SafeERC20.safeTransferFrom(token, msg.sender, address(this), amount);
     }
 
-    function mintHotWalletUsingToken(
+    function mintHotWallet(
         uint256[] memory tokenId,
-        address tokenAddress,
-        uint256 amount,
         uint256 quantity,
         address to
-    ) external {
+    ) external isWhitelisted(msg.sender){
         require(quantity <= 10, "Cannot buy more than 10 nfts");
         require(quantity != 0, "Insufficient quantity");
         require(isSaleActive, "Sale Inactive");
         require(
-            tokenAddress != address(0) && to != address(0),
+            to != address(0),
             "Address cannot be zero"
         );
         require(tokenId.length == quantity, "Invalid parameter");
-        require(whitelist[msg.sender], "Not whitelisted");
-        IERC20 token;
-        token = IERC20(tokenAddress);
-        require(
-            token.allowance(msg.sender, address(this)) >= amount,
-            "Check token allowance"
-        );
         for (uint256 i = 0; i < quantity; i++) {
             if (tokenId[i] <= NFTTOTALSUPPLY && !_exists(tokenId[i])) {
                 _safeMint(to, tokenId[i]);
                 emit NFTMinted(to, tokenId[i], quantity, true, _CONTRACTID);
             } else {
                 emit NFTMinted(
-                    msg.sender,
+                    to,
                     tokenId[i],
                     quantity,
                     false,
@@ -172,8 +167,32 @@ contract K4NftCarSignatureEdition1V2 is ERC721, Ownable, ReentrancyGuard {
                 );
             }
         }
-        SafeERC20.safeTransferFrom(token, msg.sender, address(this), amount);
-        emit TokenTransfered(tokenAddress, msg.sender, address(this), amount);
+    }
+
+    function directMint(
+        uint256 tokenId,
+        bytes32 hash,
+        bytes memory signature
+    ) external {
+        require(isSaleActive, "Sale Inactive");
+        require(
+            recoverSigner(hash, signature) == owner(),
+            "Address is not authorized"
+        );
+        require(!signatureUsed[signature], "Already signature used");
+        if (tokenId <= NFTTOTALSUPPLY && !_exists(tokenId)) {
+            _safeMint(msg.sender, tokenId);
+            emit NFTMinted(msg.sender, tokenId, 1,true, _CONTRACTID);
+        } else {
+            emit NFTMinted(
+                msg.sender,
+                tokenId,
+                0,
+                false,
+                _CONTRACTID
+            );
+        }
+        signatureUsed[signature] = true;
     }
 
     function withdraw(address payable recipient) public onlyOwner {
@@ -198,35 +217,22 @@ contract K4NftCarSignatureEdition1V2 is ERC721, Ownable, ReentrancyGuard {
 
     function setHotwalletAddress(address user) external onlyOwner {
         require(user != address(0), "Address cannot be 0");
-        require(!whitelist[user], "User already exists");
-        whitelist[user] = true;
-        hotWalletAddress.push(user);
+        require(!whitelistedAddress[user], "User already exists");
+        whitelistedAddress[user] = true;
     }
 
     function removeHotwalletAddress(address user) public onlyOwner {
         require(user != address(0), "Address cannot be 0");
-        address[] memory hotWalletAddresses = hotWalletAddress;
-        require(whitelist[user], "User already removed");
-        for (uint256 i = 0; i < hotWalletAddress.length; i++) {
-            if (hotWalletAddress[i] == user) {
-                delete hotWalletAddresses[i];
-                hotWalletAddresses[i] = hotWalletAddresses[
-                    hotWalletAddresses.length - 1
-                ];
-                whitelist[user] = false;
-            }
-        }
-        hotWalletAddress = hotWalletAddresses;
-        hotWalletAddress.pop();
+        whitelistedAddress[user] = false;
     }
 
-    function getHotWalletAddress()
+    function getWhiteListedAddress(address _address)
         external
         view
         onlyOwner
-        returns (address[] memory)
+        returns (bool)
     {
-        return hotWalletAddress;
+        return whitelistedAddress[_address];
     }
 
     function flipSaleStatus() public onlyOwner {

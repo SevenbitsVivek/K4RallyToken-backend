@@ -15,7 +15,7 @@ contract K4NftCarSignatureEdition1V1 is ERC721, Ownable, ReentrancyGuard {
     uint256 private constant _CONTRACTID = 11;
 
     event NFTMinted(
-        address _from,
+        address _to,
         uint256 indexed _tokenId,
         uint256 indexed _quantity,
         bool _success,

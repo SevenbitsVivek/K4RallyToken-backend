@@ -46,8 +46,13 @@ contract('K4NftCarSignatureEdition2V1', function (accounts) {
     const tempUser5 = {
         tokenId: [4],
         quantity: 1,
-        amount: 1000,
         to: accounts[1]
+    }
+
+    const tempUser6 = {
+        tokenId: 9,
+        hash: "0xe637013db7c3a0a22c0668f18b7092cb40754271cdb15353b05a5e56c760b197",
+        signature: "0xc05ccc5477d24c45d1b6c55c3c673fb78f48cc8170e8cf8151820f360d4887df36f472fbd1d7bbaa00bc39ea5a43105757b51f121c34cccc3a22638ef7ed25c01b"
     }
 
     const accounts1 = config.networks.hardhat.accounts;
@@ -78,34 +83,36 @@ contract('K4NftCarSignatureEdition2V1', function (accounts) {
 
         assert.equal(getTokenBalance.toNumber(), 1000, 'user token balance should be 1000')
         assert.equal(getNftBalance.toString(), 1, 'tokenId for respective owner should be same')
+        assert.equal(getNftBalance.toString(), 1, 'tokenId for respective owner should be same')
         assert.equal(getNftOwner.toString(), wallet2.address, 'nft owner for respective tokenId should be same')
     });
 
     it('user mints the nft with hot wallet by using token', async function () {
-        await MyTokenInstance.transfer(wallet2.address, 1000)
-        await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: wallet2.address })
-        const getTokenBalance = await MyTokenInstance.balanceOf(wallet2.address)
         await K4NftCarSignatureEdition2V1Instance.setHotwalletAddress(wallet2.address, { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
-        await K4NftCarSignatureEdition2V1Instance.mintHotWalletUsingToken(tempUser5.tokenId, MyTokenInstance.address, tempUser5.amount, tempUser5.quantity, tempUser5.to, { from: wallet2.address });
+        await K4NftCarSignatureEdition2V1Instance.mintHotWallet(tempUser5.tokenId, tempUser5.quantity, tempUser5.to, { from: wallet2.address });
         const getNftBalance = await K4NftCarSignatureEdition2V1Instance.balanceOf(wallet2.address)
         const getNftOwner = await K4NftCarSignatureEdition2V1Instance.ownerOf(tempUser2.tokenId)
 
-        assert.equal(getTokenBalance.toNumber(), 1000, 'user token balance should be 1000')
         assert.equal(getNftBalance.toString(), 2, 'tokenId for respective owner should be same')
         assert.equal(getNftOwner.toString(), wallet2.address, 'nft owner for respective tokenId should be same')
     });
 
+    it('user directly mints the token with directMint function', async function () {
+        await K4NftCarSignatureEdition2V1Instance.directMint(tempUser6.tokenId, tempUser6.hash, tempUser6.signature, { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
+        const getNftBalance = await K4NftCarSignatureEdition2V1Instance.balanceOf(wallet2.address)
+        const getNftOwner = await K4NftCarSignatureEdition2V1Instance.ownerOf(tempUser6.tokenId)
+
+        assert.equal(getNftBalance.toString(), 2, 'tokenId for respective owner should be same')
+        assert.equal(getNftOwner.toString(), "0x90F79bf6EB2c4f870365E785982E1f101E93b906", 'nft owner for respective tokenId should be same')
+    });
+
     it('if user mints the nft without whitelisting using hot wallet, then user will get an error', async () => {
-        await MyTokenInstance.transfer(accounts[4], 1000)
-        await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: accounts[4] })
         await K4NftCarSignatureEdition2V1Instance.setHotwalletAddress(accounts[4], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
-        await K4NftCarSignatureEdition2V1Instance.mintHotWalletUsingToken(tempUser5.tokenId, MyTokenInstance.address, tempUser5.amount, tempUser5.quantity, accounts[5], { from: accounts[4] });
+        await K4NftCarSignatureEdition2V1Instance.mintHotWallet(tempUser5.tokenId, tempUser5.quantity, accounts[5], { from: accounts[4] });
 
         try {
-            await MyTokenInstance.transfer(accounts[5], 1000)
-            await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: accounts[5] })
             await K4NftCarSignatureEdition2V1Instance.setHotwalletAddress(accounts[5], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
-            await K4NftCarSignatureEdition2V1Instance.mintHotWalletUsingToken(tempUser5.tokenId, MyTokenInstance.address, tempUser5.amount, tempUser5.quantity, tempUser5.to, { from: accounts[5] });
+            await K4NftCarSignatureEdition2V1Instance.mintHotWallet(tempUser5.tokenId, tempUser5.quantity, tempUser5.to, { from: accounts[5] });
 
         } catch (error) {
             console.log("Error handled")
@@ -118,7 +125,7 @@ contract('K4NftCarSignatureEdition2V1', function (accounts) {
 
         try {
             await K4NftCarSignatureEdition2V1Instance.setHotwalletAddress(accounts[7], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
-            // await K4NftCarSignatureEdition2V1Instance.setHotwalletAddress(accounts[7], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
+            // await K4NftCarSignatureEdition2Instance.setHotwalletAddress(accounts[7], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
         } catch (error) {
             console.log("Error handled")
             assert.equal(error.message, "VM Exception while processing transaction: reverted with reason string 'User already exists'")
@@ -140,23 +147,18 @@ contract('K4NftCarSignatureEdition2V1', function (accounts) {
     });
 
     it('if user mints the nft after removing from the whitelisting, then user will get an error', async () => {
-        await MyTokenInstance.transfer(accounts[9], 1000)
-        await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: accounts[9] })
         await K4NftCarSignatureEdition2V1Instance.setHotwalletAddress(accounts[9], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
-        await K4NftCarSignatureEdition2V1Instance.mintHotWalletUsingToken(tempUser5.tokenId, MyTokenInstance.address, tempUser5.amount, tempUser5.quantity, tempUser5.to, { from: accounts[9] });
-   
+        await K4NftCarSignatureEdition2V1Instance.mintHotWallet(tempUser5.tokenId, tempUser5.quantity, tempUser5.to, { from: accounts[9] });
+
         try {
-            await MyTokenInstance.transfer(accounts[10], 1000)
-            await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: accounts[10] })
             await K4NftCarSignatureEdition2V1Instance.setHotwalletAddress(accounts[10], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
-            await K4NftCarSignatureEdition2V1Instance.mintHotWalletUsingToken(tempUser5.tokenId, MyTokenInstance.address, tempUser5.amount, tempUser5.quantity, tempUser5.to, { from: accounts[10] });
+            await K4NftCarSignatureEdition2V1Instance.mintHotWallet(tempUser5.tokenId, tempUser5.quantity, tempUser5.to, { from: accounts[10] });
             await K4NftCarSignatureEdition2V1Instance.removeHotwalletAddress(accounts[10], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
-            // await K4NftCarSignatureEdition2V1Instance.mintHotWalletUsingToken(tempUser5.tokenId, MyTokenInstance.address, tempUser5.amount, tempUser5.quantity, tempUser5.to, { from: accounts[10] });
-            const getWalletAddress = await K4NftCarSignatureEdition2V1Instance.getHotWalletAddress({ from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
-            console.log("getWalletAddress3 ===>", getWalletAddress)
+            // await K4NftCarSignatureEdition2V1Instance.mintHotWallet(tempUser5.tokenId, tempUser5.quantity, tempUser5.to, { from: accounts[10] });
+            const getWalletAddress = await K4NftCarSignatureEdition2V1Instance.getWhiteListedAddress(accounts[10], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
         } catch (error) {
             console.log("Error handled")
-            assert.equal(error.message, "VM Exception while processing transaction: reverted with reason string 'Not whitelisted'")
+            assert.equal(error.message, "VM Exception while processing transaction: reverted with reason string 'You need to be whitelisted'")
         }
     });
 
@@ -197,6 +199,128 @@ contract('K4NftCarSignatureEdition2V1', function (accounts) {
         } catch (error) {
             console.log("Error handled")
             assert.equal(error.message, "VM Exception while processing transaction: reverted with reason string 'Cannot buy more than 10 nfts'")
+        }
+    });
+
+    it('if user buys nft more than totalSupply using token, then user will get an mint status', async () => {
+        var tx1, tx2
+        await MyTokenInstance.transfer(wallet1.address, 1000)
+        await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: wallet1.address })
+        tx1 = await K4NftCarSignatureEdition2V1Instance.safeMintUsingToken([20], MyTokenInstance.address, tempUser4.amount, tempUser3.quantity, "0x41b7fa740697da272779c47d81fce86dfe333e7dcc1a12b6cdbe8e47b0a6dc4e", "0xf9559abc3d5def386a9049df198925a264417135b205e021b5078766c1bdb39d6e5462df3de85e3ac9a8df02e9342c0fb5335af374f5463b5d5e4693eb63f92b1b", { from: wallet1.address });
+        const { logs } = tx1;
+        assert.ok(Array.isArray(logs));
+        const log = logs[1];
+        assert.equal(log.event, 'NFTMinted');
+        assert.equal(log.args._to.toString(), wallet1.address);
+        assert.equal(log.args._tokenId.toNumber(), [20]);
+        assert.equal(log.args._quantity, tempUser3.quantity);
+        assert.equal(log.args._success, true);
+        assert.equal(log.args._contractID.toNumber(), 12);
+        try {
+            await MyTokenInstance.transfer(wallet1.address, 1000)
+            await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: wallet1.address })
+            tx2 = await K4NftCarSignatureEdition2V1Instance.safeMintUsingToken([1000], MyTokenInstance.address, tempUser4.amount, 1, "0x1e138275fafac6befb1fcd9cb5495756e21650f4ac156962d6756c2700a9f08a", "0xf530c048833bfc3e44e7ebb4e2b7804ae07f2eea3984f6d4241de5e4bc9cd05713b47d9ad0a8d0057dfdd6d6363a5446077dea7145bbc04623d43bcf53b9e0221c", { from: wallet1.address });
+            const { logs } = tx2;
+            assert.ok(Array.isArray(logs));
+            const log = logs[0];
+            assert.equal(log.event, 'NFTMinted');
+            assert.equal(log.args._to.toString(), wallet1.address);
+            assert.equal(log.args._tokenId.toNumber(), [1000]);
+            assert.equal(log.args._quantity, 1);
+            assert.equal(log.args._success, false);
+            assert.equal(log.args._contractID.toNumber(), 12);
+        } catch (error) {
+            console.log("Error handled")
+            console.log("error.message ===>", error.message)
+        }
+    });
+
+    it('if user buys nft more than totalSupply using ether, then user will get an mint status', async () => {
+        var tx1, tx2
+        tx1 = await K4NftCarSignatureEdition2V1Instance.safeMintUsingEther([21], tempUser3.quantity, "0x6af3fa03c0b40d028473bf77d676560198e19c14762864d1cd33338fb233ef5c", "0x7f76bc36edb71a335ab7bbfc3edce50358aa4032dd2f19ff8e62220aeb482846127a7024c3d68ad1c71c4bc99d219f7d09a78ec0f73030644f0899facf6c658b1c", { from: wallet1.address, value: 1000 });
+        const { logs } = tx1;
+        assert.ok(Array.isArray(logs));
+        const log = logs[1];
+        assert.equal(log.event, 'NFTMinted');
+        assert.equal(log.args._to.toString(), wallet1.address);
+        assert.equal(log.args._tokenId.toNumber(), [21]);
+        assert.equal(log.args._quantity, tempUser3.quantity);
+        assert.equal(log.args._success, true);
+        assert.equal(log.args._contractID.toNumber(), 12);
+        try {
+            tx2 = await K4NftCarSignatureEdition2V1Instance.safeMintUsingEther([1001], 1, "0x0851b8e288d9e6709e9a8831912e0978a3098ac760e96e0d6f0998d557402475", "0xe4a003d0176387d65f4744900fe7adc6eb6bb65ff7790debcdbc22e69c68c523181f0a08fe7dcc2a0a95edecf510a5ecf0a5b5a496ba1dd1a8801c4efacc0d471c", { from: wallet1.address, value: 1000 });
+            const { logs } = tx2;
+            assert.ok(Array.isArray(logs));
+            const log = logs[0];
+            assert.equal(log.event, 'NFTMinted');
+            assert.equal(log.args._to.toString(), wallet1.address);
+            assert.equal(log.args._tokenId.toNumber(), [1001]);
+            assert.equal(log.args._quantity, 1);
+            assert.equal(log.args._success, false);
+            assert.equal(log.args._contractID.toNumber(), 12);
+        } catch (error) {
+            console.log("Error handled")
+            console.log("error.message ===>", error.message)
+        }
+    });
+
+    it('if user buys nft more than totalSupply using hot wallet, then user will get an mint status', async () => {
+        var tx1, tx2
+        await K4NftCarSignatureEdition2V1Instance.setHotwalletAddress(accounts[10], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
+        tx1 = await K4NftCarSignatureEdition2V1Instance.mintHotWallet([22], tempUser5.quantity, tempUser5.to, { from: accounts[10] });
+        const { logs } = tx1;
+        assert.ok(Array.isArray(logs));
+        const log = logs[1];
+        assert.equal(log.event, 'NFTMinted');
+        assert.equal(log.args._to.toString(), tempUser5.to);
+        assert.equal(log.args._tokenId.toNumber(), [22]);
+        assert.equal(log.args._quantity, tempUser5.quantity);
+        assert.equal(log.args._success, true);
+        assert.equal(log.args._contractID.toNumber(), 12);
+        try {
+            await K4NftCarSignatureEdition2V1Instance.setHotwalletAddress(accounts[11], { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
+            tx2 = await K4NftCarSignatureEdition2V1Instance.mintHotWallet([1002], tempUser5.quantity, tempUser5.to, { from: accounts[11] });
+            const { logs } = tx2;
+            assert.ok(Array.isArray(logs));
+            const log = logs[0];
+            assert.equal(log.event, 'NFTMinted');
+            assert.equal(log.args._to.toString(), tempUser5.to);
+            assert.equal(log.args._tokenId.toNumber(), [1002]);
+            assert.equal(log.args._quantity, tempUser5.quantity);
+            assert.equal(log.args._success, false);
+            assert.equal(log.args._contractID.toNumber(), 12);
+        } catch (error) {
+            console.log("Error handled")
+            console.log("error.message ===>", error.message)
+        }
+    });
+
+    it('if user buys nft more than totalSupply using directMint function, then user will get an mint status', async () => {
+        var tx1, tx2
+        tx1 = await K4NftCarSignatureEdition2V1Instance.directMint([23], "0xe2e581df73cc212616bb3cf7369b3f38f7dbdf94964bbb9d9c2ee5bc4cb20e60", "0xef6187719a185e8c9b110965a62e707fdad8323b765c6d90e7cd4790a084d7d977dda32ce23ea08b4a4409b083ba9e6e73d8117c243e57dc958780e3e0b56d8d1c", { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
+        const { logs } = tx1;
+        assert.ok(Array.isArray(logs));
+        const log = logs[1];
+        assert.equal(log.event, 'NFTMinted');
+        assert.equal(log.args._to.toString(), '0x90F79bf6EB2c4f870365E785982E1f101E93b906');
+        assert.equal(log.args._tokenId.toNumber(), [23]);
+        assert.equal(log.args._quantity, 1);
+        assert.equal(log.args._success, true);
+        assert.equal(log.args._contractID.toNumber(), 12);
+        try {
+            tx2 = await K4NftCarSignatureEdition2V1Instance.directMint(1003, "0xb0c901e6cd87e9b3466f493de763afe2dbabc0065c8e9e00fecc13ab91d71981", "0x43215faf37d396a113f7ebec3371dc69a61bb3eafcc634ae6c874d0309828f74760efe9b3f53559a86b72f5dc347e042078e8d66568108e004a0c3492019799f1b", { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
+            const { logs } = tx2;
+            assert.ok(Array.isArray(logs));
+            const log = logs[0];
+            assert.equal(log.event, 'NFTMinted');
+            assert.equal(log.args._to.toString(), '0x90F79bf6EB2c4f870365E785982E1f101E93b906');
+            assert.equal(log.args._tokenId.toNumber(), [1003]);
+            assert.equal(log.args._quantity, 0);
+            assert.equal(log.args._success, false);
+            assert.equal(log.args._contractID.toNumber(), 12);
+        } catch (error) {
+            console.log("Error handled")
+            console.log("error.message ===>", error.message)
         }
     });
 
@@ -276,23 +400,6 @@ contract('K4NftCarSignatureEdition2V1', function (accounts) {
         }
     });
 
-    it('if user buys nft after sale ends using ether and token, then user will get an error', async () => {
-        await MyTokenInstance.transfer(wallet1.address, 1000)
-        await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: wallet1.address })
-        await K4NftCarSignatureEdition2V1Instance.safeMintUsingToken(tempUser3.tokenId, MyTokenInstance.address, tempUser4.amount, tempUser3.quantity, "0x439cd1d318a99d99cc37e10f2311717d869f7242e58c1a4fff017b92218f88f7", "0xecfe16d90d9f0bbdbadc0e80d6c6579a855dc4373be34f238eeb38fd40eb1361628cc1d659e9cd51acb6e189a0dd03f7d5311c59d38a18af7ece2632ca729e5a1b", { from: wallet1.address });
-        await K4NftCarSignatureEdition2V1Instance.safeMintUsingEther(tempUser3.tokenId, tempUser3.quantity, "0xaf5338334bc4571dc3c765b58e607341f8c1da8ba5f88bda631e094dd6664dce", "0x8b3c6deaee714969a36b077c3b4f88ab3cbf8a6372d377b86b4d74164689256961e090a59222befd0a45b4f4e1c0893ecba25e102c8b2830d6fe299d2d79d8a31c", { from: wallet1.address, value: 1000 });
-        try {
-            await MyTokenInstance.transfer(wallet1.address, 1000)
-            await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: wallet1.address })
-            // await K4NftCarSignatureEdition2V1Instance.flipSaleStatus({ from: "0x90F79bf6EB2c4f870365E785982E1f101E93b906" })
-            await K4NftCarSignatureEdition2V1Instance.safeMintUsingToken([4, 5, 6, 7, 8, 9, 10, 11, 12, 13], MyTokenInstance.address, tempUser4.amount, 10, "0xd022a60618ce846728aa77de7d079e5c80c8df527efc708ff4c6c2d0297ddc68", "0xe539b6e7225245c6b3a6fcf5a0f5d28794aa8cc2150723b9a57cc26b09fda3211d683bbd4af2ca62b5937aefff6139bbe985e1899dea48409cb625ba22bb4f1b1b", { from: wallet1.address });
-            await K4NftCarSignatureEdition2V1Instance.safeMintUsingEther([4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 10, "0xb3a1435689089d5189150a8d15b00cab0dcd3414a8a10a7161b31a1d17f04a83", "0x4e7d56393ade9738923b3fd72aeda49e4e58c7fb04891934ce26cf3f196b10f7205dd069713a3c467ff2b461e6d7be1a81bdb7695e998226e8e1d7c17779a8971c", { from: wallet1.address, value: 1000 });
-        } catch (error) {
-            console.log("Error handled")
-            assert.equal(error.message, "VM Exception while processing transaction: reverted with reason string 'Sale Inactive'")
-        }
-    });
-
     it('if owner withdraw tokens and ethers with 0 token address , then user will get an error', async () => {
         await MyTokenInstance.transfer(wallet1.address, 1000)
         await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: wallet1.address })
@@ -332,4 +439,29 @@ contract('K4NftCarSignatureEdition2V1', function (accounts) {
             assert.equal(error.message, "VM Exception while processing transaction: reverted with reason string 'Ownable: caller is not the owner'")
         }
     });
+
+    it('if user buys nft after sale ends with directMint function, then user will get an error', async () => {
+        await MyTokenInstance.transfer(wallet1.address, 1000)
+        await MyTokenInstance.approve(K4NftCarSignatureEdition2V1Instance.address, tempUser2.amount, { from: wallet1.address })
+        await K4NftCarSignatureEdition2V1Instance.directMint(tempUser6.tokenId, "0xfbc1c7afb9a08701cb4c8d2967bb59e0a8508230b41fd6e82fb61882406a6456", "0x0255ac8c4637d613e29de520dc1e611bc2f694880298320ea115d7d91b1c71cd4f5b7e7945293ae484adf7525dc8e0f2c8b84cb4f430d962afef46d32208514a1b", { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
+        try {
+            // await K4NftCarSignatureEdition2V1Instance.flipSaleStatus({ from: "0x90F79bf6EB2c4f870365E785982E1f101E93b906" })
+            await K4NftCarSignatureEdition2V1Instance.directMint(tempUser6.tokenId, "0x40a53c323d75615a4eca2adc786224ed3c7423a2775323130bd4002240cd4b90", "0x45633c0ea1a9e147abc6494d582c07b7c34875e674750303c6a53e28f608bd3423467abc84bbb27533ca06f8c8d8e183727f37a076fd534af7dfb08b5f9f5cfc1c", { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
+
+        } catch (error) {
+            console.log("Error handled")
+            assert.equal(error.message, "VM Exception while processing transaction: reverted with reason string 'Sale Inactive'")
+        }
+    });
+
+    it('if user uses the same hash and signature while minting nft with directMint function, then user will get an error', async () => {
+        await K4NftCarSignatureEdition2V1Instance.directMint(tempUser6.tokenId, "0x5c60f995a95069e05a2371681afb4cc2b68275a41f44b3004c9a2e0032e31bdb", "0x652bd1d2e1c720ab21ed68dbcce6587bffd760eb1747648da2df49c1cdc294e00e01b074ef9ae14007ae7eddda03f3fbd2f7d7df420be2d0f4a3ef30c0e6ecc11c", { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
+        try {
+            await K4NftCarSignatureEdition2V1Instance.directMint(tempUser6.tokenId, "0x4936e9ad0b9592d2495dbd6f118a8dde87f5528537e9e34cc642d3687ff1916a", "0x8ae0b79a80055a56c455ebd60925359be22de5420b114a4521233db0d13ff606583367100dcc833cd7ba11c16ceb482b589a26e8f22fd1fbaea769974bd431e71b", { from: '0x90F79bf6EB2c4f870365E785982E1f101E93b906' });
+        } catch (error) {
+            console.log("Error handled")
+            assert.equal(error.message, "VM Exception while processing transaction: reverted with reason string 'Already signature used'")
+        }
+    });
+
 });
