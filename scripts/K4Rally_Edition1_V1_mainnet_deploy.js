@@ -8,7 +8,7 @@ async function main() {
   const K4NftCarSignatureEdition1V1 = await ethers.getContractFactory("K4NftCarSignatureEdition1V1");
   const k4NftCarSignatureEdition1V1 = await K4NftCarSignatureEdition1V1.deploy();
 
-  console.log("k4NftCarSignatureEdition1V1 contract address:-", k4NftCarSignatureEdition1V1.address);
+  console.log("K4NftCarSignatureEdition1V1 contract address:-", k4NftCarSignatureEdition1V1.address);
 }
 
 main()

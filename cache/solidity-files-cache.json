@@ -865,6 +865,45 @@
       "artifacts": [
         "MyToken"
       ]
+    },
+    "/home/sevenbits/7 bits/daap's/K4Rally/contracts/multiSigWallet.sol": {
+      "lastModificationDate": 1673953673388,
+      "contentHash": "0ef6e3c9535f02a90965012fa7c566f0",
+      "sourceName": "contracts/multiSigWallet.sol",
+      "solcConfig": {
+        "version": "0.8.16",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
+        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "MultiSigWallet"
+      ]
     }
   }
 }
